@@ -2,23 +2,25 @@
 
 ## Initial setup
 ### Container setup
+_I'm still figuring out how best to make these files available without forcing all contents of the home directory to be inside this repository. One way I've seen it done is to make symlinks to all dotfiles jn this repo, but that seems to require a bespoke script and I'd rather not have to maintain one of those if possible_.
+
 Distrobox only mounts your host's `~` (home), but your container's `~` can be somewhere else so that dotfiles can be different and not cross-contaminate.
 
-- Install Distrobox
-- Clone this repo to `~/distrobox-homes/dev-fedora`
-- Run the following commands inside that directory
+Install Distrobox
+Clone this repo to `~/distrobox-homes/dev-fedora`
+Run the following commands inside that directory
 ```sh
 distrobox assemble create --file dev-fedora.ini
 distrobox enter dev-fedora
 ```
-- If you're login shell isn't `fish`, change that now
+If your login shell isn't `fish`, change that now
 ```sh
 chsh -s /usr/bin/fish
 ```
-- Install packages. Here are some useful sets
+Install packages. Here are some useful sets
 ```sh
 # development
-sudo dnf install neovim git-credential-oauth luarocks dotnet-sdk-8.0 rustup pnpm npm
+sudo dnf install neovim git-credential-oauth zoxide fzf luarocks dotnet-sdk-8.0 rustup pnpm npm
 ```
 The following can be found [here](https://v2.tauri.app/start/prerequisites)
 ```sh
