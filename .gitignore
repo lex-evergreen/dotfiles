@@ -3,3 +3,4 @@
 !/.config/
 !/.config/**
 !.editorconfig
+/.config/fish/conf.d/**

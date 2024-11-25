@@ -1,40 +1,59 @@
 # Lex's dotfiles
 
-## Initial setup
-### Container setup
-_I'm still figuring out how best to make these files available without forcing all contents of the home directory to be inside this repository. One way I've seen it done is to make symlinks to all dotfiles jn this repo, but that seems to require a bespoke script and I'd rather not have to maintain one of those if possible_.
+## Overview
 
+### Git repo
+I'm cloning this repo as a bare git repository and using a simple `dotfiles` alias (via `config.fish`) to manage dotfiles.
+A "bare" git repository is one whose .git files are decoupled from its tracked files. The .git files directory is specified via `--git-dir` and the tracked files ("workspace" or "work tree") root directory is specified via `--work-tree`. Since these are specified on _every git command_, you can move these around as needed.
+The `dotfiles` alias is just `git` with `--git-dir=$HOME/.dotfiles/` and `--work-tree=$HOME`.
+Because the tracked files root directory is `$HOME` and it's likely that a lot of other stuff is in `$HOME` too, the `.gitignore` file needs to specify which files should be tracked in this repo and which shouldn't. It's easier to do an allowlist for what we want to include than a blocklist for what we don't want to include, and the `*` entry at the beginning of the `.gitignore` file lets us do that.
+
+## Initial setup
+
+### Getting started
+1. Pick a `~` directory (if you're using Distrobox it's probably best to choose a different directory than your host's `~`).
+2. Clone this repo `--bare` into `~/.dotfiles`.
+3. Run `alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'` - this will not persist, but will be replaced by the alias in `config.fish`.
+4. Run `dotfiles checkout` - you may have to delete files if there are any preexisting ones that would be overwritten.
+
+### Container setup
 Distrobox only mounts your host's `~` (home), but your container's `~` can be somewhere else so that dotfiles can be different and not cross-contaminate.
 
-Install Distrobox
+#### Create Distrobox container
 Clone this repo to `~/distrobox-homes/dev-fedora`
 Run the following commands inside that directory
 ```sh
 distrobox assemble create --file dev-fedora.ini
 distrobox enter dev-fedora
 ```
+
+#### Install packages
+Here are some useful sets:
+_Development_
+```sh
+sudo dnf install neovim git-credential-oauth zoxide fzf luarocks dotnet-sdk-8.0 rustup pnpm npm
+```
+_Tauri_
+The following can be found [here](https://v2.tauri.app/start/prerequisites):
+```sh
+sudo dnf install webkit2gtk4.1-devel openssl-devel curl wget file libappindicator-gtk3-devel librsvg2-devel
+sudo dnf group install "c-development"
+```
+
+I've tried adding these to the `additional_packages` section of `dev-fedora.ini`, but for some reason they create some folders as owned by the `root` of the container (not the root of the host), and this causes permissions issues. For example, installing `neovim` this way currently creates the `.local` folder as owned by `root` instead of the user. This is why packages are installed manually in these instructions.
+
+#### Perform some initial setup
 If your login shell isn't `fish`, change that now
 ```sh
 chsh -s /usr/bin/fish
 ```
-Install packages. Here are some useful sets
-```sh
-# development
-sudo dnf install neovim git-credential-oauth zoxide fzf luarocks dotnet-sdk-8.0 rustup pnpm npm
-```
-The following can be found [here](https://v2.tauri.app/start/prerequisites)
-```sh
-# tauri
-sudo dnf install webkit2gtk4.1-devel openssl-devel curl wget file libappindicator-gtk3-devel librsvg2-devel
-sudo dnf group install "c-development"
-```
-I've tried adding these to the `additional_packages` section of `dev-fedora.ini`, but for some reason they create some folders as owned by the `root` of the container (not the root of the host), and this causes permissions issues. For example, installing `neovim` this way currently creates the `.local` folder as owned by `root` instead of the user. This is why packages are installed manually in these instructions.
-- Perform some initial setup
+Initialize `git-credential-oauth` and set a default user.
 ```sh
 git credential-oauth configure
 git config --global user.email [email]
 git config --global user.name [name]
 ```
+TODO: maybe the result of this could be stored in dotfiles?
 
 ### Entering the container automatically
 If you're using a terminal emulator that can run a custom command at start, you can set it to the following to automatically enter the container when you open the terminal.
