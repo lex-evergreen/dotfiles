@@ -4,8 +4,11 @@
 
 ### Git repo
 I'm cloning this repo as a bare git repository and using a simple `dotfiles` alias (via `config.fish`) to manage dotfiles.
-A "bare" git repository is one whose .git files are decoupled from its tracked files. The .git files directory is specified via `--git-dir` and the tracked files ("workspace" or "work tree") root directory is specified via `--work-tree`. Since these are specified on _every git command_, you can move these around as needed.
-The `dotfiles` alias is just `git` with `--git-dir=$HOME/.dotfiles/` and `--work-tree=$HOME`.
+
+A "bare" git repository is one whose .git files are decoupled from its tracked files. The .git files directory is specified via `--git-dir` or the `GIT_DIR` env var and the tracked files ("workspace" or "work tree") root directory is specified via `--work-tree` or the `GIT_WORK_TREE` env var. Since a bare repo requires these on _every git command_, the location of the .git files and its tracked files can be moved around freely.
+
+The `dotfiles` alias is just `git` with `GIT_DIR=$HOME/.dotfiles` and `GIT_WORK_TREE=$HOME`.
+
 Because the tracked files root directory is `$HOME` and it's likely that a lot of other stuff is in `$HOME` too, the `.gitignore` file needs to specify which files should be tracked in this repo and which shouldn't. It's easier to do an allowlist for what we want to include than a blocklist for what we don't want to include, and the `*` entry at the beginning of the `.gitignore` file lets us do that.
 
 ## Initial setup
@@ -16,6 +19,7 @@ Because the tracked files root directory is `$HOME` and it's likely that a lot o
 3. Run `alias dotfiles='GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME git'` - this will not persist, but will be replaced by the alias in `config.fish`.
 4. Run `dotfiles checkout` - you may have to delete files if there are any preexisting ones that would be overwritten.
 5. Run `dotfiles config --local core.worktree $HOME` to get `dotfilesnvim` fugitive working.
+6. Add any machine-specific fish config to `.fish` files in `~/.config/fish/conf.d/`, which will not be committed.
 
 ### Container setup
 Distrobox only mounts your host's `~` (home), but your container's `~` can be somewhere else so that dotfiles can be different and not cross-contaminate.

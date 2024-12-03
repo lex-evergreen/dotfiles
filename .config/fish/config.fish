@@ -1,8 +1,7 @@
 # Remove the fish greeting
 set fish_greeting
 
-# If fish isn't picking up binaries in PATHs, make sure to add "-l" to the beginning
-# of the fish command (usually in terminal config) to start it in interactive mode.
+# If fish isn't picking up binaries in PATHs, see https://github.com/fish-shell/fish-shell/issues/6594
 
 # PATHs
 if test (uname) = "Darwin"
@@ -42,3 +41,4 @@ if status is-interactive
     # Initialize fzf
     fzf --fish | source
 end
+

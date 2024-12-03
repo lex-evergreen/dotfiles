@@ -1,6 +1,8 @@
 *
 !.gitignore
-!/.config/fish/**
-!/.config/nvim/**
 !.editorconfig
-/.config/fish/conf.d/**
+!.config/
+!.config/fish/
+!.config/fish/config.fish
+!.config/fish/fish_variables
+!.config/nvim/**
