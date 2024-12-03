@@ -13,8 +13,9 @@ Because the tracked files root directory is `$HOME` and it's likely that a lot o
 ### Getting started
 1. Pick a `~` directory (if you're using Distrobox it's probably best to choose a different directory than your host's `~`).
 2. Clone this repo `--bare` into `~/.dotfiles`.
-3. Run `alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'` - this will not persist, but will be replaced by the alias in `config.fish`.
+3. Run `alias dotfiles='GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME git'` - this will not persist, but will be replaced by the alias in `config.fish`.
 4. Run `dotfiles checkout` - you may have to delete files if there are any preexisting ones that would be overwritten.
+5. Run `dotfiles config --local core.worktree $HOME` to get `dotfilesnvim` fugitive working.
 
 ### Container setup
 Distrobox only mounts your host's `~` (home), but your container's `~` can be somewhere else so that dotfiles can be different and not cross-contaminate.
@@ -53,7 +54,11 @@ git credential-oauth configure
 git config --global user.email [email]
 git config --global user.name [name]
 ```
-TODO: maybe the result of this could be stored in dotfiles?
+If your global user isn't the user you want to use for committing to dotfiles, you can use this command to set which user to use
+```sh
+dotfiles config credential.https://github.com/lex-evergreen/dotfiles.git.username [username]
+```
+TODO: maybe this config could be stored in dotfiles?
 
 ### Entering the container automatically
 If you're using a terminal emulator that can run a custom command at start, you can set it to the following to automatically enter the container when you open the terminal.
