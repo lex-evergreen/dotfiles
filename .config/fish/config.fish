@@ -2,13 +2,12 @@
 set fish_greeting
 
 # If fish isn't picking up binaries in PATHs, see https://github.com/fish-shell/fish-shell/issues/6594
+# See https://fishshell.com/docs/current/interactive.html#shared-bindings for the default keybinds.
 
 # PATHs
 if test (uname) = "Darwin"
-    # Fix Alt+F keybinding on MacOS. It's supposed to accept just the next autosuggested word.
-    # See https://github.com/fish-shell/fish-shell/blob/master/doc_src/cmds/bind.rst
-    bind \e\[102\;9u forward-bigword
-
+    # On macos, use the traditional XDG_CONFIG_HOME.
+    set -qx XDG_CONFIG_HOME || set -x XDG_CONFIG_HOME $HOME/.config
     if string match -q "*Apple*" (sysctl -n machdep.cpu.brand_string)
         # On Apple Silicon Macs, homebrew installs things in /opt/homebrew
         contains /opt/homebrew/bin
@@ -30,6 +29,8 @@ if status is-interactive
     alias dotfiles='GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME git'
     alias dotfilesnvim='GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME nvim'
 
+    # Prevent <C-z> from sending current program to background
+    stty susp undef
     # Initialize zoxide
     # zoxide fish autocomplete doesn't really work right now. See https://github.com/ajeetdsouza/zoxide/issues/811
     # You can get suggestions by adding a space after your guess and pressing tab.

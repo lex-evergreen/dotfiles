@@ -1,0 +1,26 @@
+command = /opt/homebrew/bin/fish --login --interactive
+shell-integration = fish
+
+# Appearance
+theme = Builtin Tango Dark
+font-family = Cascadia Code
+font-size = 14
+font-thicken = true
+
+# Disable ligatures
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+
+# MacOS stuff
+macos-titlebar-proxy-icon = hidden
+macos-option-as-alt = true
+
+### Keybinds ###
+# See https://ghostty.org/docs/config/reference#keybind
+# Fix fish directory history navigation.
+keybind = cmd+left=unbind
+keybind = cmd+right=unbind
+# Scroll up and down
+keybind = shift+up=scroll_page_lines:-50
+keybind = shift+down=scroll_page_lines:50

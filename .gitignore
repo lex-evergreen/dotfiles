@@ -5,4 +5,8 @@
 !.config/fish/
 !.config/fish/config.fish
 !.config/fish/fish_variables
+!.config/k9s/
+!.config/k9s/views.yaml
+!.config/ghostty/
+!.config/ghostty/config
 !.config/nvim/**
