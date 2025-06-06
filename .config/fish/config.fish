@@ -23,6 +23,9 @@ else
     or set PATH /home/linuxbrew/.linuxbrew $PATH
 end
 
+contains ~/.local/share/bob/nvim-bin
+or set PATH ~/.local/share/bob/nvim-bin $PATH
+
 # Interactive use
 if status is-interactive
     # Dotfiles management
@@ -32,13 +35,7 @@ if status is-interactive
     # Prevent <C-z> from sending current program to background
     stty susp undef
     # Initialize zoxide
-    # zoxide fish autocomplete doesn't really work right now. See https://github.com/ajeetdsouza/zoxide/issues/811
-    # You can get suggestions by adding a space after your guess and pressing tab.
     zoxide init fish --cmd cd | source
-    # Tried the following config as a result of a comment on that issue, doesn't seem to work.
-    # complete -e cd
-    # complete -c cd -a '(__fish_complete_cd)'
-
     # Initialize fzf
     fzf --fish | source
 end
