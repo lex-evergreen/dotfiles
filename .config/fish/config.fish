@@ -38,5 +38,7 @@ if status is-interactive
     zoxide init fish --cmd cd | source
     # Initialize fzf
     fzf --fish | source
+    # Set git branch name max length
+    set -g __fish_git_prompt_shorten_branch_len 20
 end
 
