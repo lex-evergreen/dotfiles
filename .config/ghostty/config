@@ -2,7 +2,9 @@ command = /opt/homebrew/bin/fish --login --interactive
 shell-integration = fish
 
 # Appearance
-theme = Builtin Tango Dark
+theme = Gruvbox Dark
+background = 000000
+foreground = E8E2D3
 font-family = Cascadia Code
 font-size = 14
 font-thicken = true
@@ -24,3 +26,21 @@ keybind = cmd+right=unbind
 # Scroll up and down
 keybind = shift+up=scroll_page_lines:-50
 keybind = shift+down=scroll_page_lines:50
+
+### tmux overrides ###
+# \x02 = hex 02 = decimal 2 = ASCII control character STX
+# open/close tab
+keybind = ctrl+shift+t=text:\x02c
+keybind = ctrl+shift+w=text:\x02w
+# jump to tab by number
+keybind = ctrl+1=text:\x021
+keybind = ctrl+2=text:\x022
+keybind = ctrl+3=text:\x023
+keybind = ctrl+4=text:\x024
+keybind = ctrl+5=text:\x025
+keybind = ctrl+6=text:\x026
+keybind = ctrl+7=text:\x027
+keybind = ctrl+8=text:\x028
+keybind = ctrl+9=text:\x029
+# Fix shift+enter
+keybind = shift+enter=text:\n

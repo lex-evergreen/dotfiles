@@ -10,3 +10,5 @@
 !.config/ghostty/
 !.config/ghostty/config
 !.config/nvim/**
+!.tmux.conf
+!.vimium-options.json

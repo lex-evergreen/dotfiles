@@ -10,21 +10,19 @@ if test (uname) = "Darwin"
     set -qx XDG_CONFIG_HOME || set -x XDG_CONFIG_HOME $HOME/.config
     if string match -q "*Apple*" (sysctl -n machdep.cpu.brand_string)
         # On Apple Silicon Macs, homebrew installs things in /opt/homebrew
-        contains /opt/homebrew/bin
-        or set PATH /opt/homebrew/bin $PATH
+        fish_add_path --path /opt/homebrew/bin
+        fish_add_path --path /opt/homebrew/sbin
     else
         # On Intel Macs, homebrew installs things at /usr/local
-        contains /usr/local/bin
-        or set PATH /usr/local/bin $PATH
+        fish_add_path --path /usr/local/bin
     end
 else
     # On Linux, homebrew installs things at /home/linuxbrew/.linuxbrew
-    contains /home/linuxbrew/.linuxbrew
-    or set PATH /home/linuxbrew/.linuxbrew $PATH
+    fish_add_path --path /home/linuxbrew/.linuxbrew
 end
 
-contains ~/.local/share/bob/nvim-bin
-or set PATH ~/.local/share/bob/nvim-bin $PATH
+# Bob nvim version manager
+fish_add_path --path ~/.local/share/bob/nvim-bin
 
 # Interactive use
 if status is-interactive
@@ -40,5 +38,7 @@ if status is-interactive
     fzf --fish | source
     # Set git branch name max length
     set -g __fish_git_prompt_shorten_branch_len 20
+    # fnm
+    fnm env --use-on-cd --shell fish | source
 end
 

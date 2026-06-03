@@ -1,0 +1,9 @@
+{
+  "keyMappings": "map <c-d> scrollPageDown\nmap <c-u> scrollPageUp\nunmap d\nunmap u",
+  "scrollStepSize": 250,
+  "smoothScroll": false,
+  "grabBackFocus": true,
+  "searchEngines": "",
+  "settingsVersion": "2.3.1",
+  "exclusionRules": []
+}
