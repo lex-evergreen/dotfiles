@@ -1,0 +1,65 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "snapshot": false,
+    "experimental": {
+        "disable_paste_summary": true
+    },
+    "permission": {
+        "websearch": "allow"
+    },
+    "agent": {
+        "research": {
+            "description": "Read-only agent for performing code research and analysis",
+            "mode": "primary",
+            "prompt": "{file:./agents/research.md}",
+            "permission": {
+                "websearch": "allow",
+                "webfetch": "allow",
+                "glob": "allow",
+                "grep": "allow",
+                "*write*": "deny",
+                "*add*": "deny",
+                "*create*": "deny",
+                "*push*": "deny",
+                "*update*": "deny",
+                "*delete*": "deny",
+                "write": "deny",
+                "edit": "deny",
+                "bash": {
+                    "*": "deny",
+                    "* > *": "deny",
+                    "* >> *": "deny",
+                    "git status*": "allow",
+                    "git diff*": "allow",
+                    "git log*": "allow",
+                    "git show*": "allow",
+                    "git grep *": "allow",
+                    "git stash show *": "allow",
+                    "git stash list *": "allow",
+                    "git reflog *": "allow",
+                    "gh pr view *": "allow",
+                    "gh pr diff *": "allow",
+                    "gh release view *": "allow",
+                    "az * list *": "allow",
+                    "az * show *": "allow",
+                    "az * get *": "allow",
+                    "az * exists *": "allow",
+                    "az * check *": "allow",
+                    "az * validate *": "allow",
+                    "az devops invoke --area build --resource logs * --http-method GET": "allow",
+                    "grep *": "allow",
+                    "rg *": "allow",
+                    "wc *": "allow",
+                    "find *": "allow",
+                    "sort *": "allow",
+                    "uniq *": "allow",
+                    "head *": "allow",
+                    "tail *": "allow",
+                    "cat *": "allow",
+                    "ls *": "allow",
+                    "echo *": "allow",
+                },
+            }
+        }
+    }
+}

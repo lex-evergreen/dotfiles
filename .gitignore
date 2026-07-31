@@ -12,6 +12,11 @@
 !.config/nvim/**
 !.tmux.conf
 !.vimium-options.json
+!.config/opencode/
+!.config/opencode/opencode.json
+!.config/opencode/AGENTS.md
+!.config/opencode/agents/
+!.config/opencode/agents/research.md
 !.local/
 !.local/bin/
 !.local/bin/h265
