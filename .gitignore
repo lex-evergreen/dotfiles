@@ -12,3 +12,6 @@
 !.config/nvim/**
 !.tmux.conf
 !.vimium-options.json
+!.local/
+!.local/bin/
+!.local/bin/h265

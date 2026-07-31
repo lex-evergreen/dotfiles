@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+set -e
+
+usage() {
+  cat <<'EOF'
+Usage: h265 FILE [-crf VALUE] [-preset NAME]
+
+Convert FILE to H.265/HEVC and write FILE-h265.mp4.
+
+Options:
+  -crf VALUE     Quality vs size. Lower values preserve more quality but produce larger files.
+                  The encoder default (28) is used if omitted.
+                  Common values range from 18-32.
+                  Stands for "Constant Rate Factor".
+
+  -preset NAME   Encoding speed vs size. Slower presets take longer but usually produce smaller files at similar quality.
+                  The encoder default (medium) is used if omitted.
+                  Valid presets are ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, and veryslow.
+
+  -h, --help      Show this help.
+EOF
+}
+
+[[ $# -eq 0 ]] && { usage >&2; exit 2; }
+[[ $1 == -h || $1 == --help ]] && { usage; exit; }
+
+command -v ffmpeg >/dev/null 2>&1 ||
+  { echo "h265: ffmpeg is not installed" >&2; exit 127; }
+
+ffmpeg -hide_banner -encoders 2>/dev/null |
+  grep -q '[[:space:]]libx265[[:space:]]' ||
+  { echo "h265: this ffmpeg build lacks libx265" >&2; exit 1; }
+
+input=$1
+shift
+
+[[ -f $input ]] || { echo "h265: file not found: $input" >&2; exit 1; }
+
+options=()
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -crf|-preset)
+      [[ $# -ge 2 ]] || { echo "h265: $1 requires a value" >&2; exit 2; }
+      options+=("$1" "$2")
+      shift 2
+      ;;
+    -h|--help)
+      usage
+      exit
+      ;;
+    *)
+      echo "h265: unknown option: $1" >&2
+      usage >&2
+      exit 2
+      ;;
+  esac
+done
+
+output="${input%.*}-h265.mp4"
+
+ffmpeg \
+  -i "$input" \
+  -c:v libx265 \
+  -tag:v hvc1 \
+  "${options[@]}" \
+  -c:a copy \
+  -movflags +faststart \
+  "$output"
