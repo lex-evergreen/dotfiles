@@ -28,8 +28,8 @@ fish_add_path --path ~/.local/share/bob/nvim-bin
 # Interactive use
 if status is-interactive
     # Dotfiles management
-    alias dotfiles='GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME git'
-    alias dotfilesnvim='GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME nvim'
+    alias dotfiles='GIT_DIR=$HOME/.dotfiles git'
+    alias dotfilesnvim='GIT_DIR=$HOME/.dotfiles nvim'
 
     # Prevent <C-z> from sending current program to background
     stty susp undef
