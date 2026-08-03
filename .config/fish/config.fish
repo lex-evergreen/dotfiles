@@ -18,8 +18,8 @@ if test (uname) = "Darwin"
         fish_add_path --path /usr/local/bin
     end
 else
-    # On Linux, homebrew installs things at /home/linuxbrew/.linuxbrew
-    fish_add_path --path /home/linuxbrew/.linuxbrew
+    # On Linux, homebrew installs things at /home/linuxbrew/.linuxbrew/bin
+    fish_add_path --path /home/linuxbrew/.linuxbrew/bin
 end
 
 # Bob nvim version manager
