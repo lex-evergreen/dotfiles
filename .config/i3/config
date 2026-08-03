@@ -1,0 +1,98 @@
+# Use super as the main modifier
+set $mod Mod4
+
+# Font
+font pango:monospace 10
+
+# Essentials: dmenu, terminal, kill, reload, exit
+bindsym $mod+d exec --no-startup-id dmenu_run -i
+bindsym $mod+Return exec --no-startup-id ghostty
+bindsym Mod1+q kill
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec i3-msg exit
+bindsym $mod+Shift+b exec --no-startup-id ~/.config/polybar/launch.sh
+bindsym Control+Mod1+q exec lock
+# Audio F-keys
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id "sh -c 'pactl set-sink-mute @DEFAULT_SINK@ 0; pactl get-sink-volume @DEFAULT_SINK@ | awk -F/ '\''NR==1 {exit !(($2+0) < 95)}'\'' && pactl set-sink-volume @DEFAULT_SINK@ +5% || pactl set-sink-volume @DEFAULT_SINK@ 100%'"
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+# New windows split horizontally by default
+default_orientation horizontal
+
+# Toggle between layouts
+bindsym $mod+slash layout toggle split
+bindsym $mod+comma layout toggle tabbed stacking
+
+# Focus movement
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Also allow arrow keys
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move windows
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Switch to workspace
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+
+# Move container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+
+# Gaps
+gaps inner 2
+gaps outer 0
+
+# Default layout behavior
+workspace_layout default
+default_border pixel 2
+default_floating_border pixel 2
+
+# QoL Shortcuts
+bindsym Control+Mod1+4 exec xfce4-screenshooter --region
+
+# Startup programs
+exec --no-startup-id /usr/libexec/xfce-polkit
+exec --no-startup-id xfsettingsd --replace
+exec --no-startup-id xfce4-screensaver
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id nm-applet
+exec --no-startup-id ~/.config/polybar/launch.sh
