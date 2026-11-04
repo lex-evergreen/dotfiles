@@ -1,4 +1,3 @@
-command = /opt/homebrew/bin/fish --login --interactive
 shell-integration = fish
 
 # Appearance

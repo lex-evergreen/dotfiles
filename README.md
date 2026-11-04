@@ -20,9 +20,24 @@ git clone --bare \
     --config branch.main.merge=refs/heads/main \
     <url> $HOME/.dotfiles
 ```
+
 2. Checkout the default branch 
 ```sh
 GIT_DIR=$HOME/.dotfiles git checkout
 ```
 You may have to delete files if there are any preexisting ones that would be overwritten.
-3. Add any machine-specific fish config to `.fish` files in `~/.config/fish/conf.d/`, which will not be committed.
+
+### Machine-specific config
+- (one-time) - Install homebrew, then install `fish` using homebrew
+- (one-time) - Set the default shell to `fish` using `chsh` (see what it is now with `echo $SHELL`)
+
+```
+# Register fish if it isn't already registered
+grep -Fxq "$(command -v fish)" /etc/shells ||
+  command -v fish | sudo tee -a /etc/shells
+
+# Set fish as your account's default shell
+chsh -s "$(command -v fish)"
+```
+
+- Add fish config (e.g., env vars) to `.fish` files in `~/.config/fish/conf.d/`, which will not be committed.
