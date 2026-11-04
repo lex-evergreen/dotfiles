@@ -12,6 +12,7 @@
 !.config/nvim/**
 !.config/mise/
 !.config/mise/config.toml
+!.aerospace.toml
 !.tmux.conf
 !.vimium-options.json
 !.config/opencode/
