@@ -1,0 +1,17 @@
+{
+    "$schema": "https://opencode.ai/v2/cli.json",
+    "tabs": {
+        "mode": "off"
+    },
+    "cursor": {
+        "style": "block",
+        "blinking": false
+    },
+    "prompt": {
+        "paste": "full"
+    },
+    "theme": {
+        "name": "system"
+    },
+    "animations": false
+}

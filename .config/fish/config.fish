@@ -24,6 +24,8 @@ end
 
 # Bob nvim version manager
 fish_add_path --path ~/.local/share/bob/nvim-bin
+# dotnet tools path
+fish_add_path --path ~/.dotnet/tools
 
 # Interactive use
 if status is-interactive
@@ -40,6 +42,12 @@ if status is-interactive
     # Set git branch name max length
     set -g __fish_git_prompt_shorten_branch_len 20
     # fnm
-    fnm env --use-on-cd --shell fish | source
+    if which fnm >/dev/null
+        fnm env --use-on-cd --shell fish | source
+    end
+    # mise
+    if which mise >/dev/null
+        mise activate fish | source
+    end
 end
 

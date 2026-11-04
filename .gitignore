@@ -10,10 +10,13 @@
 !.config/ghostty/
 !.config/ghostty/config
 !.config/nvim/**
+!.config/mise/
+!.config/mise/config.toml
 !.tmux.conf
 !.vimium-options.json
 !.config/opencode/
 !.config/opencode/opencode.json
+!.config/opencode/cli.json
 !.config/opencode/AGENTS.md
 !.config/opencode/agents/
 !.config/opencode/agents/research.md

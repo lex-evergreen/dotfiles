@@ -1,0 +1,36 @@
+[tools]
+
+## Core Lang CLIs
+dotnet = "latest"
+rust = "latest" # Installs rustup and toolchain via rustup
+
+## LSPs
+# "dotnet:roslyn-language-server" = { version = "latest", prerelease = true } # use `dotnet tool install/update --global roslyn-language-server --prerelease`
+"npm:typescript" = "latest"
+# vscode-langservers-extracted provides:
+#   vscode-eslint-language-server
+#   vscode-json-language-server
+#   vscode-html-language-server
+"npm:vscode-langservers-extracted" = "latest"
+# rust-analyzer = "latest" # use rustup instead, it adds this to PATH automatically.
+ty = "latest"
+ruff = "latest"
+"npm:yaml-language-server" = "latest"
+helm-ls = "latest"
+lua-language-server = "latest"
+terraform-ls = "latest"
+# This doesn't work since they don't actually release the artifacts through GitHub. Using brew instead for now.
+# "github:Kotlin/kotlin-lsp" = "latest"
+
+## Formatters
+"dotnet:CSharpier" = "latest"
+
+## CLI Tools
+
+# For now, these are still managed elsewhere
+# node = "lts"
+
+# Globally-instsalled npm packages in fnm
+# ├── corepack@0.34.0
+# ├── npm@10.9.4
+# ├── pnpm@10.24.0

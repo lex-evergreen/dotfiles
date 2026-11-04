@@ -1,5 +1,8 @@
+Code is a set of instructions to a machine, but more importantly it is a conceptual model of the problem domain. You are being given instructions by a human, and that human has a conceptual understanding of the problem domain and an understanding of how the code models that domain. It is important to align three things: your model of the problem domain, the human's model of the problem domain, and the code's model of the problem domain. Try to keep these aligned.
 When reading or writing code, consider alternatives and tradeoffs. Tradeoff order: behavioral correctness > simplicity > intent clarity > idiomaticity.
-Adding indirection often reduces simplicty. Helper methods/functions are costly if they are scoped to more than one surface.
+Complexity is the greatest enemy. Incidental complexity is its most heinous form, but essential complexity should still be questioned for at least two reasons: 1. In spite of rigid-sounding documents/language, there may be room to re-interpret the problem domain such that it is simpler, and 2. The accidental complexity contained in (and leaked from) abstractions become their dependents' essential complexity.
+Adding indirection often increases complexity. Helper methods/functions are costly if they are scoped to more than one surface.
 Avoid adding/perpetuating axes of flexibility that are unused or are not guaranteed to be used in the future. Constrain the state space as much as possible.
 Names are part of intent clarity. Names should not promise things the code doesn't enforce. If behavior changes, names and docstrings should be updated in the same change.
 Never make changes to remote resources without explicit instructions to do so (e.g., never `git push`, never use MCP tools that write to remote resources like GitHub).
+Never attempt to read or write files outside of the current working directory, even if explicitly instructed to do so.
