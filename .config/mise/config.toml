@@ -2,7 +2,7 @@
 
 ## Core Lang CLIs
 dotnet = "latest"
-rust = "latest" # Installs rustup and toolchain via rustup
+rust = { version = "latest", components = ["rust-analyzer", "rust-src"] } # Installs rustup, toolchain via rustup, and rust-analyzer via rustup
 
 ## LSPs
 # "dotnet:roslyn-language-server" = { version = "latest", prerelease = true } # use `dotnet tool install/update --global roslyn-language-server --prerelease`
@@ -12,7 +12,6 @@ rust = "latest" # Installs rustup and toolchain via rustup
 #   vscode-json-language-server
 #   vscode-html-language-server
 "npm:vscode-langservers-extracted" = "latest"
-# rust-analyzer = "latest" # use rustup instead, it adds this to PATH automatically.
 ty = "latest"
 ruff = "latest"
 "npm:yaml-language-server" = "latest"
