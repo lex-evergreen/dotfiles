@@ -42,11 +42,11 @@ if status is-interactive
     # Set git branch name max length
     set -g __fish_git_prompt_shorten_branch_len 20
     # fnm
-    if which fnm >/dev/null
+    if command -q fnm
         fnm env --use-on-cd --shell fish | source
     end
     # mise
-    if which mise >/dev/null
+    if command -q mise
         mise activate fish | source
     end
 end
