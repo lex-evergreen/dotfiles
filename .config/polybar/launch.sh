@@ -7,4 +7,6 @@ polybar-msg cmd quit
 while pgrep -x polybar >/dev/null; do sleep 0.2; done
 
 # Launch bar(s)
-polybar
+while IFS= read -r output; do
+    MONITOR="${output%%:*}" polybar example &
+done < <(polybar --list-monitors)
