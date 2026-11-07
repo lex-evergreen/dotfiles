@@ -5,10 +5,10 @@ set fish_greeting
 # See https://fishshell.com/docs/current/interactive.html#shared-bindings for the default keybinds.
 
 # PATHs
+fish_add_path --path $HOME/.local/bin
 if test (uname) = "Darwin"
     # On macos, use the traditional XDG_CONFIG_HOME and add the standard XDG base directory.
     set -qx XDG_CONFIG_HOME || set -x XDG_CONFIG_HOME $HOME/.config
-    fish_add_path --path $HOME/.local/bin
     if string match -q "*Apple*" (sysctl -n machdep.cpu.brand_string)
         # On Apple Silicon Macs, homebrew installs things in /opt/homebrew
         fish_add_path --path /opt/homebrew/bin
